@@ -14,6 +14,7 @@ database.ref().on("child_added" , function (snap){
   var name = snap.val().name;
   var destination = snap.val().destination;
   var firstTrain = snap.val().firstTrain;
+  var frequency = snap.val().frequency;
   var min = snap.val().min;
   var next = snap.val().text;
 
@@ -21,27 +22,27 @@ database.ref().on("child_added" , function (snap){
 });
 
 // Takes user input from form and adds new train to table
-$('#addTrainBtn').on('click', function(){
-  var trainName = $('#trainName').val().trim();
-  var destination = $('#destination').val().trim();
-  var firstTrain = $('#firstInput').val().trim();
-  var frequency = $('#frequency').val().trim();
+$("#addTrainBtn").on("click", function(){
+  var trainName = $("#trainName").val().trim();
+  var destination = $("#destination").val().trim();
+  var firstTrain = $("#firstInput").val().trim();
+  var frequency = $("#frequency").val().trim();
 
   // Check to make sure all inputs have a value
   if ( trainName == ""){
-    alert('Enter a train name!')
+    alert("Enter a train name!")
     return false;
   }
   if ( destination == ""){
-    alert('Enter a destination!')
+    alert("Enter a destination!")
     return false;
   }
   if ( firstTrain == ""){
-    alert('Enter a first train time!')
+    alert("Enter a first train time!")
     return false;
   }
   if ( frequency == ""){
-    alert('Enter a frequency!')
+    alert("Enter a frequency!")
     return false;
   }
 
@@ -50,17 +51,17 @@ $('#addTrainBtn').on('click', function(){
   var firstTrainConverted = moment(firstTrain, "hh:mm").subtract("1, years");
   console.log(firstTrainConverted);
   var currentTime = moment();
-  console.log('Current Time: ' + moment(currentTime).format("hh:mm"));
+  console.log("Current Time: " + moment(currentTime).format("hh:mm"));
 
   // Time difference between current time and first train time
   var timeDifference = currentTime.diff(moment(firstTrainConverted), "minutes");
-  console.log('Difference: ' + timeDifference);
+  console.log("Difference: " + timeDifference);
   var remainder = difference % frequency;
   console.log(remainder);
   var minutesUntilTrain = frequency - remainder;
-  console.log('Minutes until next train: ' + minutesUntilTrain);
+  console.log("Minutes until next train: " + minutesUntilTrain);
   var nextTrain = moment().add(minutesUntilTrain , "minutes").format("hh:mm:a");
-  console.log('Next train: ' + nextTrain);
+  console.log("Next train: " + nextTrain);
 
   var newTrain = {
     name: trainName,
@@ -73,10 +74,10 @@ $('#addTrainBtn').on('click', function(){
 
   console.log(newTrain);
   database.ref().push(newTrain);
-  $('#trainName').val("");
-  $('#destination').val("");
-  $('#firstTrain').val("");
-  $('#frequency').val("");
+  $("#trainName").val("");
+  $("#destination").val("");
+  $("#firstTrain").val("");
+  $("#frequency").val("");
 
   return false;
 
