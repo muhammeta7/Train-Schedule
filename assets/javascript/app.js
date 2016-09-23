@@ -70,6 +70,7 @@ $('#addTrainBtn').on('click', function(){
     min: minutesUntilTrain,
     next: nextTrain
   }
+
   console.log(newTrain);
   database.ref().push(newTrain);
   $('#trainName').val("");
