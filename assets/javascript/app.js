@@ -7,6 +7,7 @@ var config = {
   messagingSenderId: "282130084244"
 };
 firebase.initializeApp(config);
+console.log(firebase)
 
 var database = firebase.database();
 
@@ -16,7 +17,7 @@ database.ref().on("child_added" , function (snap){
   var firstTrain = snap.val().firstTrain;
   var frequency = snap.val().frequency;
   var min = snap.val().min;
-  var next = snap.val().text;
+  var next = snap.val().next;
 
   $("#trainTable > tbody").append("<tr><td>" + name + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + next + "</td><td>" + min + "</td></tr>");
 });
@@ -25,7 +26,7 @@ database.ref().on("child_added" , function (snap){
 $("#addTrainBtn").on("click", function(){
   var trainName = $("#trainName").val().trim();
   var destination = $("#destination").val().trim();
-  var firstTrain = $("#firstInput").val().trim();
+  var firstTrain = $("#firstTrain").val().trim();
   var frequency = $("#frequency").val().trim();
 
   // Check to make sure all inputs have a value
