@@ -7,7 +7,7 @@ var config = {
   messagingSenderId: "282130084244"
 };
 firebase.initializeApp(config);
-console.log(firebase)
+console.log("firebase")
 
 var database = firebase.database();
 
@@ -22,8 +22,12 @@ database.ref().on("child_added" , function (snap){
   $("#trainTable > tbody").append("<tr><td>" + name + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + next + "</td><td>" + min + "</td></tr>");
 });
 
+
+
 // Takes user input from form and adds new train to table
-$("#addTrainBtn").on("click", function(){
+$("#input").on("submit", function(e){
+  e.preventDefault();
+  e.stopPropagation();
   var trainName = $("#trainName").val().trim();
   var destination = $("#destination").val().trim();
   var firstTrain = $("#firstTrain").val().trim();
@@ -50,14 +54,14 @@ $("#addTrainBtn").on("click", function(){
 // The math behind the madness
 // Subtracts first train time back a year to make sure it's before the current time
   var firstTrainConverted = moment(firstTrain, "hh:mm").subtract("1, years");
-  console.log(firstTrainConverted);
+  alert(firstTrainConverted);
   var currentTime = moment();
   console.log("Current Time: " + moment(currentTime).format("hh:mm"));
 
   // Time difference between current time and first train time
   var timeDifference = currentTime.diff(moment(firstTrainConverted), "minutes");
   console.log("Difference: " + timeDifference);
-  var remainder = difference % frequency;
+  var remainder = timeDifference % frequency;
   console.log(remainder);
   var minutesUntilTrain = frequency - remainder;
   console.log("Minutes until next train: " + minutesUntilTrain);
@@ -73,7 +77,7 @@ $("#addTrainBtn").on("click", function(){
     next: nextTrain
   }
 
-  console.log(newTrain);
+  alert(newTrain);
   database.ref().push(newTrain);
   $("#trainName").val("");
   $("#destination").val("");
@@ -82,4 +86,4 @@ $("#addTrainBtn").on("click", function(){
 
   return false;
 
-})
+});
