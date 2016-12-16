@@ -8,16 +8,11 @@ The week 7 assignment was to create a train schedule using HTML, CSS, and jQuery
 
 # :satellite: Technologies Used
 
-
-
 1. Materialize framework visit: [Materialize link](http://materializecss.com/getting-started.html)
 
 2. HTML, CSS, jQuery
 
 3. Firebase database: [Firebase Link](https://firebase.google.com/)
-
-
-
 
 # Screenshots 
 
@@ -29,7 +24,7 @@ The week 7 assignment was to create a train schedule using HTML, CSS, and jQuery
 ![Add New Train](/screenshots/newTrain.png)
 
 ### Shows how data is stored into Firebase DB
-!Firebase](/screenshots/firebase.png)
+![Firebase](/screenshots/firebase.png)
 
 ## Authors
 
